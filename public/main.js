@@ -144,6 +144,15 @@ async function sendFlips({url, formData}){
   return response.json()
 }
 
+function coinList(array) {
+  let text = "";
+  let arrayLength = array.length
+  for (let i = 0; i < arrayLength; i++) {
+    text += '<li><img src="assets/img/'+array[i]+'.png" class="bigcoin"></li>';
+  }
+  return text
+}
+
 // Flip multiple coins and show coin images in table as well as summary results
 // Enter number and press button to activate coin flip series
 
