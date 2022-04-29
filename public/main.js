@@ -96,6 +96,54 @@ async function flipCoins(){
     }
 }
 
+const call = document.getElementById("call")
+
+call.addEventListener("submit", flipCall)
+
+async function flipCall(){
+  const endpoint = '/app/flip/call'
+
+  const url = document.baseURI+endpoint
+
+  const formEvent = event.currentTarget
+
+  try{
+    const formData = new FormData(formEvent)
+
+    const result = await sendFlips({url, formData})
+
+    console.log(results)
+
+    document.getElementById("choice").innerHTML = "Guess: "+results.call;
+		document.getElementById("actual").innerHTML = "Actual: "+results.flip;
+		document.getElementById("results").innerHTML = "Result: "+results.result;
+
+    document.getElementById("coingame").innerHTML = '<li><img src="assets/img/'+results.call+'.png" class="bigcoin" id="callcoin"></li><li><img src="assets/img/'+results.flip+'.png" class="bigcoin"></li><li><img src="assets/img/'+results.result+'.png" class="bigcoin"></li>';
+
+  } catch(e){
+    console.log(e)
+  }
+
+}
+
+async function sendFlips({url, formData}){
+  const plainFormData = Object.fromEntries(formData.entries())
+  const formDataJson = JOSN.stringify(plainFormData)
+  console.log(formDataJson)
+
+  const options = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json"
+    },
+    body: formDataJson
+  }
+  const response = await fetch(url, options)
+
+  return response.json()
+}
+
 // Flip multiple coins and show coin images in table as well as summary results
 // Enter number and press button to activate coin flip series
 
