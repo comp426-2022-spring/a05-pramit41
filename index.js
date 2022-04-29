@@ -66,25 +66,6 @@ app.use((req, res, next) => {
     next()
 })
 
-if (args.debug){
-    app.get('/app/log/access', (req, res) =>{
-        try{
-            const stmt = logdb.prepare(`SELECT * from accesslog`).all()
-            res.status(200).json(stmt)
-        } catch (e){
-            console.log(e)
-        }
-    })
-}
-
-app.get('/app/error', (req, res) => {
-    throw new Error('Error test was successful') 
-})
-
-app.listen(port, () => {
-    console.log('App listening on port %PORT%'.replace('%PORT%', port))
-})
-
 //a02 functions 
 function coinFlip() {
     let num = Math.random()
@@ -135,6 +116,9 @@ function flipACoin(call) {
 
 //app endpoints start
 
+//serve static html from ./public 
+app.use(express.static('./public'))
+
 app.get("/app/", (req, res, next) => {
     res.json({"message":"Your API works! (200)"});
 	res.status(200);
@@ -166,5 +150,21 @@ app.use(function(req, res){
     res.status(statusCode).end(statusCode+ ' ' +statusMessage)
 })
 
-//serve base html from ./public 
-app.use(express.static('./public'))
+if (args.debug){
+    app.get('/app/log/access', (req, res) =>{
+        try{
+            const stmt = logdb.prepare(`SELECT * from accesslog`).all()
+            res.status(200).json(stmt)
+        } catch (e){
+            console.log(e)
+        }
+    })
+}
+
+app.get('/app/error', (req, res) => {
+    throw new Error('Error test was successful') 
+})
+
+app.listen(port, () => {
+    console.log('App listening on port %PORT%'.replace('%PORT%', port))
+})
