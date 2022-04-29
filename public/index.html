@@ -27,16 +27,21 @@
   </head>
   <body>
     <nav>
-      <button id="homenav">Home</button>
-      <button id="singlenav">Flip one coin</button>
-      <button id="multinav">Flip multiple coins</button>
-      <button id="guessnav">Guess the result</button>
+      <button id="homenav" onclick="homeNav()">Home</button>
+      <button id="singlenav" onclick="sigleNav()">Flip one coin</button>
+      <button id="multinav" onclick="multiNav()">Flip multiple coins</button>
+      <button id="guessnav" onclick="guessNav()">Guess the result</button>
     </nav>
-    <div id="home">
-      
+    <div id="home" class="active">
+      <h1>Come flip some coins!</h1>
+      <p1>Press the buttons above to play the different type of coin flip game.</p1>
     </div>    
     <div id="single" class="hidden">
-      
+      <h1>Flip a coin</h1>
+      <button id="coin">Flip coin!</button>
+      <h2>Result</h2>
+		  <p><span id="result"></span></p>
+      <img src="assets/img/coin.png" id="quarter" class="bigcoin">  
     </div>
     <div id="multi" class="hidden">
       
