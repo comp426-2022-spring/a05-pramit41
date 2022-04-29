@@ -32,10 +32,12 @@
       <button id="multinav" onclick="multiNav()">Flip multiple coins</button>
       <button id="guessnav" onclick="guessNav()">Guess the result</button>
     </nav>
+
     <div id="home" class="active">
       <h1>Come flip some coins!</h1>
       <p1>Press the buttons above to play the different type of coin flip game.</p1>
     </div>    
+
     <div id="single" class="hidden">
       <h1>Flip a coin</h1>
       <button id="coin">Flip coin!</button>
@@ -43,9 +45,25 @@
 		  <p><span id="result"></span></p>
       <img src="assets/img/coin.png" id="quarter" class="bigcoin">  
     </div>
+
     <div id="multi" class="hidden">
-      
+      <h1>Flip many coins as you like</h1>
+      <form id="coins">
+        <label for="number">
+					<strong>How many coins?</strong>
+				</label>
+				<input type="number" name="number" id="number">
+				<input type="submit" value="Flip 'em!">
+        <h2>Results</h2>
+        <p id="heads"></p>
+        <p id="tails"></p>
+        <ul id="coinlist">
+          <li></li>
+        </ul>
+      </form>
+
     </div>
+
     <div id="guess" class="hidden">
       
     </div>
