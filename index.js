@@ -85,6 +85,7 @@ app.listen(port, () => {
     console.log('App listening on port %PORT%'.replace('%PORT%', port))
 })
 
+//a02 functions 
 function coinFlip() {
     let num = Math.random()
     if(num > 0.50){
@@ -134,6 +135,11 @@ function flipACoin(call) {
 
 //app endpoints start
 
+app.get("/app/", (req, res, next) => {
+    res.json({"message":"Your API works! (200)"});
+	res.status(200);
+});
+
 app.get('/app/flip/call/tails', (req, res) => {
     const resultFlip = flipACoin('tails')
     res.status(200).json({ 'call' : resultFlip.call, 'flip': resultFlip.flip, 'result': resultFlip.result})
@@ -152,3 +158,13 @@ app.get('/app/flips/:number', (req, res)=> {
 app.get('/app/flip/', (req, res) => {
     res.status(200).json({'flip': coinFlip()})
 })
+
+//default endpoint if incorrect one
+app.use(function(req, res){
+    const statusCode = 404
+    const statusMessage = 'NOT FOUND'
+    res.status(statusCode).end(statusCode+ ' ' +statusMessage)
+})
+
+//serve base html from ./public 
+app.use(express.static('./public'))
