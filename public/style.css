@@ -13,3 +13,12 @@ img.bigcoin {
 img.smallcoin {
   width: 50px;
 }
+
+button.active {
+  background-color: black;
+  color:aliceblue;
+}
+
+img#callcoin {
+  opacity: 0.5;
+}
